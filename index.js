@@ -61,9 +61,9 @@ function enhanceFile(file) {
             STORAGE_CACHE.del(file.filename);
             return fs.remove(file.path)
         },
-        moveTo : (to)=>{
+        moveTo : (to, options = {})=>{
             STORAGE_CACHE.del(file.filename);
-            return fs.move(file.path, to)
+            return fs.move(file.path, to, options)
         }
     }
 }
