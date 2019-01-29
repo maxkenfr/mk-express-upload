@@ -64,6 +64,12 @@ function enhanceFile(file) {
         moveTo : (to, options = {})=>{
             STORAGE_CACHE.del(file.filename);
             return fs.move(file.path, to, options)
+        },
+        buffer : ()=>{
+            return fs.readFile(file.path);
+        },
+        bufferSync : ()=>{
+            return fs.readFileSync(file.path);
         }
     }
 }

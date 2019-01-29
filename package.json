@@ -1,6 +1,6 @@
 {
   "name": "mk-express-upload",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "repository": "https://github.com/maxkenfr/mk-express-upload.git",
   "author": "maxbryselbout <max@maxken.fr>",
