@@ -25,7 +25,7 @@ const multerStorage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         let fileName = uuidv4();
-        fileName = `${fileName}.${file.mimetype.match(/\/(\w*){1}/is)[1]}`;
+        fileName = `${fileName}.${mime.extension(file.mimetype)}`;
         cb(null, fileName);
     }
 });
@@ -113,6 +113,7 @@ function uploadMiddleware(opts){
             else {
                 req.file.type = mime.extension(req.file.mimetype);
                 req.file.sizeStr = bytes(req.file.size);
+                req.file.basename = path.basename(req.file.filename, req.file.type),
                 STORAGE_CACHE.set(req.file.filename, req.file);
                 req.file = enhanceFile(req.file);
                 next();
