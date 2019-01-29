@@ -4,7 +4,7 @@ const path = require('path');
 const Boom = require('boom');
 const mime = require('mime-types');
 const bytes = require('bytes');
-const md5 = require('md5');
+const uuidv4 = require('uuid/v4');
 const LruCache = require('lru-cache');
 const STORAGE_CACHE_LRU = new LruCache(100);
 
@@ -24,7 +24,7 @@ const multerStorage = multer.diskStorage({
         cb(null, tmpDir)
     },
     filename: function (req, file, cb) {
-        let fileName = md5(file.originalname + file.mimetype + new Date);
+        let fileName = uuidv4();
         fileName = `${fileName}.${file.mimetype.match(/\/(\w*){1}/is)[1]}`;
         cb(null, fileName);
     }
