@@ -113,7 +113,7 @@ function uploadMiddleware(opts){
             else {
                 req.file.type = mime.extension(req.file.mimetype);
                 req.file.sizeStr = bytes(req.file.size);
-                req.file.basename = path.basename(req.file.filename, req.file.type),
+                req.file.basename = path.basename(req.file.filename, `.${req.file.type}`),
                 STORAGE_CACHE.set(req.file.filename, req.file);
                 req.file = enhanceFile(req.file);
                 next();
