@@ -70,6 +70,9 @@ function enhanceFile(file) {
         },
         bufferSync : ()=>{
             return fs.readFileSync(file.path);
+        },
+        stream : ()=>{
+            return fs.createReadStream(file.path)
         }
     }
 }
