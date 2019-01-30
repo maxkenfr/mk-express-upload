@@ -61,8 +61,9 @@ function enhanceFile(file) {
             STORAGE_CACHE.del(file.filename);
             return fs.remove(file.path)
         },
-        moveTo : (to, options = {})=>{
+        moveTo : async (to, options = {})=>{
             STORAGE_CACHE.del(file.filename);
+            await fs.ensureDir(path.dirname(file.path));
             return fs.move(file.path, to, options)
         },
         buffer : ()=>{
