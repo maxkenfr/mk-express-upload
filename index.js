@@ -111,6 +111,7 @@ function uploadMiddleware(opts){
         upload(req, res, async function (err) {
             if (err) next(err);
             else {
+                req.file.createdAt = new Date();
                 req.file.type = mime.extension(req.file.mimetype);
                 req.file.sizeStr = bytes(req.file.size);
                 req.file.basename = path.basename(req.file.filename, `.${req.file.type}`),
