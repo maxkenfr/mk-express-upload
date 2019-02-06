@@ -44,7 +44,7 @@ function setStorageCache(storageCache) {
     return true;
 }
 
-const storage = function (filename) {
+const storage = function (filename = '') {
     let file = STORAGE_CACHE.get(path.basename(filename));
     if(!file) return false;
     if(!fs.existsSync(file.path)){
@@ -78,7 +78,7 @@ function enhanceFile(file) {
     }
 }
 
-function uploadMiddleware(opts){
+function uploadMiddleware(opts = {}){
     let options = {
         allowed : {},
         ...opts
