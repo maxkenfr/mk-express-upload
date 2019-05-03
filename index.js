@@ -111,14 +111,17 @@ function uploadMiddleware(opts = {}){
     return function (req, res, next) {
         upload(req, res, async function (err) {
             if (err) next(err);
-            else {
+            try {
                 req.file.createdAt = new Date();
                 req.file.type = mime.extension(req.file.mimetype);
                 req.file.sizeStr = bytes(req.file.size);
                 req.file.basename = path.basename(req.file.filename, `.${req.file.type}`),
-                STORAGE_CACHE.set(req.file.filename, req.file);
+                    STORAGE_CACHE.set(req.file.filename, req.file);
                 req.file = enhanceFile(req.file);
                 next();
+            }
+            catch (e) {
+                next(e);
             }
         })
     }
